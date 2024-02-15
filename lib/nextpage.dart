@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/item.dart';
 
 class header extends StatefulWidget {
   const header({super.key});
@@ -8,13 +9,14 @@ class header extends StatefulWidget {
 }
 
 class _nextpage extends State<header> {
+  final _taskcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
       return MaterialApp(
       home: Scaffold(
         body: Stack(
           children: <Widget>[
-            Scaffold(
+           const  Scaffold(
               backgroundColor: Colors.white,
               // Your Scaffold content here
             ),
@@ -23,9 +25,7 @@ class _nextpage extends State<header> {
               right: 50.0,// Adjust the positioning as needed
               child: ElevatedButton(
                 onPressed: () {
-
-                  // Your onPressed function her
-                  // e
+                  Navigator.pop(context);
                 }, // Changed from Text to Icon
                 style: ElevatedButton.styleFrom(
                   shape: const CircleBorder(
@@ -37,33 +37,35 @@ class _nextpage extends State<header> {
                   ),
 
                   // Making the button round
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   primary: Colors.white, // Button color set to white
                   onPrimary: Colors.black, // This sets the icon color if you need to change it from the default
                   elevation: 0,
                   // Button size
                 ),
 
-          child: Icon(Icons.close,size: 20,)
+          child: const Icon(Icons.close,size: 20,)
               ),
             ),
 
-              const Padding(
-                padding: EdgeInsets.only(left:60.0,right:50.0,top:200.0,bottom:08.0),
+               Padding(
+                padding: const EdgeInsets.only(left:60.0,right:50.0,top:200.0,bottom:08.0),
                 child: TextField(
-                  decoration: InputDecoration(
+                  controller: _taskcontroller,
+                  decoration: const InputDecoration(
                     hintText: 'Enter new task',
-                    border: InputBorder.none, // Removes the border
+                    border: InputBorder.none,
+                    // Removes the border
                     // Additional decoration can be added here
                   ),
-                  style: TextStyle(fontSize: 25.0),
+                  style: const TextStyle(fontSize: 25.0),
 
                   // Further customization of the TextField
                 ),
               ),
         Padding(
           // Adjusts the alignment slightly to the upper right
-          padding: EdgeInsets.only(left: 60.0, top: 280.0), // Right and Upwards
+          padding:  const EdgeInsets.only(left: 60.0, top: 280.0), // Right and Upwards
           child: Row(
             children: [
               SizedBox(
@@ -74,7 +76,7 @@ class _nextpage extends State<header> {
                     // Your button action here
                     print('Elevated Button Pressed');
                   },
-                  child: Row(
+                  child: const Row(
                     mainAxisSize: MainAxisSize.min, // To minimize the row's width to its children's width
                     children: [
                       Icon(Icons.calendar_today), // Calendar icon
@@ -88,24 +90,24 @@ class _nextpage extends State<header> {
                     elevation: 0, // Removes the elevation
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25), // Rounded corners
-                      side: BorderSide(color: Colors.transparent, width: 0), // No visible border
+                      side: const BorderSide(color: Colors.transparent, width: 0), // No visible border
                     ),
                   ),
                 ),
               ),
-              SizedBox(width: 10), // Space between the two buttons
+              const SizedBox(width: 10), // Space between the two buttons
               ElevatedButton(
                 onPressed: () {
                   // Your button action here for the round button
                   print('Round Button Pressed');
                 },
-                child: Icon(Icons.radio_button_checked,size: 30.0,color: Colors.blue,), // Check icon
+                child: const Icon(Icons.radio_button_checked,size: 30.0,color: Colors.blue,), // Check icon
                 style: ElevatedButton.styleFrom(
                   primary: Colors.grey[200], // Button color
                   onPrimary: Colors.black, // Icon color
                   elevation: 0, // Removes the elevation
-                  shape: CircleBorder(), // Makes the button round
-                  padding: EdgeInsets.all(15), // Button size
+                  shape: const CircleBorder(), // Makes the button round
+                  padding: const EdgeInsets.all(15), // Button size
                 ),
 
               ),
@@ -118,9 +120,9 @@ class _nextpage extends State<header> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Icon(Icons.file_download_done_outlined,color: Colors.grey),
-                    Icon(Icons.flag_circle,color:Colors.grey),
-                    Icon(Icons.nights_stay,color: Colors.grey),
+                    Icon(Icons.create_new_folder,color: Colors.grey),
+                    Icon(Icons.flag_outlined,color:Colors.grey),
+                    Icon(Icons.nightlight_outlined,color: Colors.grey),
                   ],
                 ),
               ),
@@ -135,30 +137,34 @@ class _nextpage extends State<header> {
                     height: 50.0, // Specifies the width and height of the button
                     child: ElevatedButton(
                       onPressed: () {
-                        // Your button action here
-                        print('Elevated Button Pressed');
+                        if (_taskcontroller.text.isNotEmpty) {
+                          Task currentTask = Task(tasks.length + 1, _taskcontroller.text,Colors.green,false);
+                          Navigator.pop(context, currentTask);
+                        }
                       },
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min, // To minimize the row's width to its children's width
-                        children: [
-
-                          Text('New Task'),
-                          Icon(Icons.arrow_downward_outlined), // Calendar icon
-                          SizedBox(width: 10), // Space between icon and text
-                        ],
-                      ),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.blue, // Button color
                         onPrimary: Colors.black, // Text color
                         elevation: 0, // Removes the elevation
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25), // Rounded corners
-                          side: BorderSide(color: Colors.transparent, width: 0), // No visible border
+                          side: const BorderSide(color: Colors.transparent, width: 0), // No visible border
                         ),
                       ),
+                      child: const Row(
+                        mainAxisSize: MainAxisSize.min, // To minimize the row's width to its children's width
+                        children: [
+
+                          Text('New Task'),
+                          Icon(Icons.keyboard_arrow_up), // Calendar icon
+                          SizedBox(width: 10), // Space between icon and text
+                        ],
+                      ),
+
                     ),
                   ),
                 ),
+
               ],
             ),
 
