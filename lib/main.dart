@@ -180,18 +180,24 @@ class _TestAppState extends State<TestApp> {
         ],
       ),
       drawer: const Drawer(
+
         elevation: 10.0,
-        backgroundColor: Color.fromARGB(255, 45, 76, 131),
+        backgroundColor:Colors.indigoAccent,
         child: Column(
           children: <Widget>[
             SafeArea(
                 child: CircleAvatar(
-                  backgroundColor: Colors.indigo,
-                  backgroundImage: AssetImage("assets/images/girl.png"),
+                  radius:20,
+                  backgroundImage: AssetImage("/images/icon.jpg"),
                 )),
-            Text(
-              "Nandhini",
-              style: TextStyle(fontSize: 30.0),
+
+            Padding(
+              padding: EdgeInsets.all(15.0),
+              child: Text(
+                "Nandhini",
+                style: TextStyle(fontSize: 30.0),
+
+              ),
             ),
             ListTile(
               title: Text("Templates"),
@@ -206,7 +212,7 @@ class _TestAppState extends State<TestApp> {
               leading: Icon(Icons.analytics),
             ),
             ListTile(
-              title: Text("Setting"),
+              title: Text("Settings"),
               leading: Icon(Icons.settings),
             ),
           ],
