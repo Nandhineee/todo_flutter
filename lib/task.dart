@@ -7,6 +7,7 @@ class CategoryList {
   final double percent;
   final Color color;
 
+
   CategoryList(this.categoryId, this.categoryName, this.percent, this.color,
       this.taskNumber);
 }

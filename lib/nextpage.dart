@@ -10,6 +10,22 @@ class header extends StatefulWidget {
 
 class _nextpage extends State<header> {
   final _taskcontroller = TextEditingController();
+  // DateTime _selectedDate = DateTime.now();
+  //
+  // Future<void> _selectDate(BuildContext context) async {
+  //   final DateTime? picked = await showDatePicker(
+  //     context: context,
+  //     initialDate: DateTime.now(),
+  //     firstDate: DateTime(2015, 8),
+  //     lastDate: DateTime(2101),
+  //   );
+  //   if (picked != null && picked != _selectedDate) {
+  //     setState(() {
+  //       _selectedDate = picked;
+  //     });
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
       return MaterialApp(
@@ -56,14 +72,18 @@ class _nextpage extends State<header> {
                     hintText: 'Enter new task',
                     border: InputBorder.none,
                     // Removes the border
+
                     // Additional decoration can be added here
                   ),
+
                   style: const TextStyle(fontSize: 25.0),
 
                   // Further customization of the TextField
                 ),
               ),
-        Padding(
+
+
+            Padding(
           // Adjusts the alignment slightly to the upper right
           padding:  const EdgeInsets.only(left: 60.0, top: 280.0), // Right and Upwards
           child: Row(
@@ -76,10 +96,10 @@ class _nextpage extends State<header> {
                     // Your button action here
                     print('Elevated Button Pressed');
                   },
-                  child: const Row(
+                  child:  Row(
                     mainAxisSize: MainAxisSize.min, // To minimize the row's width to its children's width
                     children: [
-                      Icon(Icons.calendar_today), // Calendar icon
+                      Icon(Icons.calendar_month), // Calendar icon
                       SizedBox(width: 10), // Space between icon and text
                       Text('today'),
                     ],
@@ -138,7 +158,7 @@ class _nextpage extends State<header> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (_taskcontroller.text.isNotEmpty) {
-                          Task currentTask = Task(tasks.length + 1, _taskcontroller.text,Colors.green,false);
+                          Task currentTask = Task(tasks.length + 1, _taskcontroller.text,Colors.green,false,);
                           Navigator.pop(context, currentTask);
                         }
                       },
